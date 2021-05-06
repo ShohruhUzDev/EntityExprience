@@ -17,14 +17,14 @@ namespace Entity3
             //    db.SaveChanges();
 
             //}
-            //using(StudenContext db=new StudenContext())
-            //{
-            //    var students = db.Students.ToList();
-            //    foreach(var i in students)
-            //    {
-            //        Console.WriteLine($"Ismi-{i.Name} yoshi={i.Age}");
-            //    }
-            //}
+            using (StudenContext db = new StudenContext())
+            {
+                var students = db.Students.ToList();
+                foreach (var i in students)
+                {
+                    Console.WriteLine($"Ismi-{i.Name} yoshi={i.Age}");
+                }
+            }
 
 
             //using (StudenContext db = new StudenContext())
@@ -46,23 +46,23 @@ namespace Entity3
             //    }
 
             //}
-            using (StudenContext db = new StudenContext())
-            {
-                Student student = db.Students.Where(i => i.Name == "shohzod").FirstOrDefault();
-                if (student != null)
-                {
-                    db.Students.Remove(student);
-                    //db.Students.Update(student);
-                    db.SaveChanges();
-                }
+            //using (StudenContext db = new StudenContext())
+            //{
+            //    Student student = db.Students.Where(i => i.Name == "shohzod").FirstOrDefault();
+            //    if (student != null)
+            //    {
+            //        db.Students.Remove(student);
+            //        //db.Students.Update(student);
+            //        db.SaveChanges();
+            //    }
 
-                var newstudent = db.Students.ToList();
-                foreach (var i in newstudent)
-                {
-                    Console.WriteLine($"new name={i.Name}  yoshi={i.Age}");
-                }
+            //    var newstudent = db.Students.ToList();
+            //    foreach (var i in newstudent)
+            //    {
+            //        Console.WriteLine($"new name={i.Name}  yoshi={i.Age}");
+            //    }
 
-            }
+            //}
 
 
         }
