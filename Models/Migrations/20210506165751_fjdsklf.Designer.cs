@@ -10,8 +10,8 @@ using Models;
 namespace Models.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20210506085515_newkew")]
-    partial class newkew
+    [Migration("20210506165751_fjdsklf")]
+    partial class fjdsklf
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,23 +38,29 @@ namespace Models.Migrations
 
             modelBuilder.Entity("Models.Product", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("ismi");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("product_id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("tarifi");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("ismi");
+
+                    b.Property<string>("Price")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("narxi");
 
-                    b.HasKey("Name");
+                    b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
 

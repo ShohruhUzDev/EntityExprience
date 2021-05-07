@@ -2,30 +2,30 @@
 
 namespace Models.Migrations
 {
-    public partial class del : Migration
+    public partial class fjdsklf : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "tarifi",
+                name: "ismi",
                 table: "Mahsulotlar",
-                type: "nvarchar(max)",
+                type: "varchar(100)",
                 nullable: false,
-                defaultValue: "",
                 oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
+                oldType: "nvarchar(45)",
+                oldMaxLength: 45);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "tarifi",
+                name: "ismi",
                 table: "Mahsulotlar",
-                type: "nvarchar(max)",
-                nullable: true,
+                type: "nvarchar(45)",
+                maxLength: 45,
+                nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
+                oldType: "varchar(100)");
         }
     }
 }

@@ -10,8 +10,8 @@ using Models;
 namespace Models.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20210506083948_edit1")]
-    partial class edit1
+    [Migration("20210506163917_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,8 +56,8 @@ namespace Models.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ismi");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int")
+                    b.Property<string>("Price")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("narxi");
 
                     b.HasKey("Id");

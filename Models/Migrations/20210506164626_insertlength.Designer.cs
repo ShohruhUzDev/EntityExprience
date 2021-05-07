@@ -10,8 +10,8 @@ using Models;
 namespace Models.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20210506090214_kalit")]
-    partial class kalit
+    [Migration("20210506164626_insertlength")]
+    partial class insertlength
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,27 +38,31 @@ namespace Models.Migrations
 
             modelBuilder.Entity("Models.Product", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("ismi");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("product_id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("tarifi");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int")
-                        .HasColumnName("product_id");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("ismi");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int")
+                    b.Property<string>("Price")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("narxi");
 
-                    b.HasKey("Name");
+                    b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
 

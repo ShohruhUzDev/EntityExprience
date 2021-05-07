@@ -2,12 +2,12 @@
 
 namespace Models.Migrations
 {
-    public partial class edit1 : Migration
+    public partial class InsertRequired : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "ismi",
+                name: "narxi",
                 table: "Mahsulotlar",
                 type: "nvarchar(max)",
                 nullable: false,
@@ -20,7 +20,7 @@ namespace Models.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "ismi",
+                name: "narxi",
                 table: "Mahsulotlar",
                 type: "nvarchar(max)",
                 nullable: true,
