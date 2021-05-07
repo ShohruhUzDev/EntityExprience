@@ -6,9 +6,12 @@ namespace Dataaloqalar
     {
         public int Id { get; set; }
         public string  Name    { get; set; }
-        public List<Company> Users { get; set; } = new List<Company>();
-    }
+       
+        public int CityId { get; set; }
+        public City City  { get; set; }
+        public List<Company> Companies { get; set; } = new List<Company>();
 
+    }
 
 
 }

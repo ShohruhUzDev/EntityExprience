@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dataaloqalar.Migrations
 {
     [DbContext(typeof(Usercontext))]
-    [Migration("20210507165040_InitialCreate")]
+    [Migration("20210507173354_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,21 @@ namespace Dataaloqalar.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Dataaloqalar.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities");
+                });
 
             modelBuilder.Entity("Dataaloqalar.Company", b =>
                 {
@@ -48,12 +63,32 @@ namespace Dataaloqalar.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId");
+
                     b.ToTable("Countries");
+                });
+
+            modelBuilder.Entity("Dataaloqalar.Position", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Positions");
                 });
 
             modelBuilder.Entity("Dataaloqalar.User", b =>
@@ -69,9 +104,14 @@ namespace Dataaloqalar.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PositionId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("PositionId");
 
                     b.ToTable("Users");
                 });
@@ -79,12 +119,23 @@ namespace Dataaloqalar.Migrations
             modelBuilder.Entity("Dataaloqalar.Company", b =>
                 {
                     b.HasOne("Dataaloqalar.Country", "Country")
-                        .WithMany("Users")
+                        .WithMany("Companies")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("Dataaloqalar.Country", b =>
+                {
+                    b.HasOne("Dataaloqalar.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("Dataaloqalar.User", b =>
@@ -93,7 +144,15 @@ namespace Dataaloqalar.Migrations
                         .WithMany("Users")
                         .HasForeignKey("CompanyId");
 
+                    b.HasOne("Dataaloqalar.Position", "Position")
+                        .WithMany("Users")
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Company");
+
+                    b.Navigation("Position");
                 });
 
             modelBuilder.Entity("Dataaloqalar.Company", b =>
@@ -102,6 +161,11 @@ namespace Dataaloqalar.Migrations
                 });
 
             modelBuilder.Entity("Dataaloqalar.Country", b =>
+                {
+                    b.Navigation("Companies");
+                });
+
+            modelBuilder.Entity("Dataaloqalar.Position", b =>
                 {
                     b.Navigation("Users");
                 });
